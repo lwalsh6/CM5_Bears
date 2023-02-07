@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CW_5_Bears.bears;
+
+//Logan Walsh
+//02-07-2023
+//This program is an object adapter example involving bears
 
 namespace CW_5_Bears
 {
     class bears
     {
+        public class BearAdapter
+        {
+            bears newBear;
+        }
         public interface ToyBear
         {
             void hug();
@@ -34,16 +43,16 @@ namespace CW_5_Bears
             {
                 Console.WriteLine("Evil carpet is tired");
             }
-            public class BearAdapter
-            {
-                //Needs adaptee variable
-            }
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
+            Grizzly angeryBear = new Grizzly();
+            Teddy plushBear = new Teddy();
+
+            angeryBear.hibernate();
         }
     }
 }
