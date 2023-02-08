@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CW_5_Bears.bears;
 
 //Logan Walsh
 //02-07-2023
@@ -11,48 +10,61 @@ using static CW_5_Bears.bears;
 
 namespace CW_5_Bears
 {
-    class bears
+    public interface ToyBear
     {
-        public class BearAdapter
+        void hug();
+    }
+    public class Teddy : ToyBear
+    {
+        public void hug()
         {
-            bears newBear;
+            Console.WriteLine("You hugged the stuffed bear, everything is fine");
         }
-        public interface ToyBear
+    }
+    public interface Bear
+    {
+        void maul();
+        void hibernate();
+    }
+    public class Grizzly : Bear
+    {
+        public void maul()
         {
-            void hug();
+            Console.WriteLine("You have been mauled after hugging the evil carpet");
         }
-        public class Teddy
+        public void hibernate()
         {
-            void hug()
-            {
-                Console.WriteLine("You hugged the stuffed bear, everything is fine");
-            }
+            Console.WriteLine("Evil carpet is tired");
         }
-            public interface Bear
+    }
+    public class BearAdapter : ToyBear
+    {
+        Bear newBear;
+
+        public BearAdapter(Bear b)
         {
-            void maul();
-            void hibernate();
+            newBear = b;
         }
-        public class Grizzly
+        public void hug()
         {
-            void maul()
-            {
-                Console.WriteLine("You have been mauled after hugging the bear");
-            }
-            void hibernate()
-            {
-                Console.WriteLine("Evil carpet is tired");
-            }
+            newBear.maul();
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Grizzly angeryBear = new Grizzly();
+            Grizzly angryBear = new Grizzly();
             Teddy plushBear = new Teddy();
+            ToyBear testBear = new BearAdapter(angryBear);
 
-            angeryBear.hibernate();
+            angryBear.maul();
+            angryBear.hibernate();
+            plushBear.hug();
+            Console.WriteLine();
+            testBear.hug();
+
+            Console.ReadKey();
         }
     }
 }
